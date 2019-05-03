@@ -10,6 +10,7 @@
 ********************************************************************************************/
 
 #include "raylib.h"
+#include "raymath.h"
 
 int main()
 {
@@ -43,6 +44,8 @@ int main()
 
     SetTargetFPS(60);   // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
+    //
+    float yaw = 0.0f;
 
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
@@ -51,10 +54,31 @@ int main()
         //----------------------------------------------------------------------------------
         
         // Move player
-        if (IsKeyDown(KEY_RIGHT)) playerPosition.x += 0.2f;
-        else if (IsKeyDown(KEY_LEFT)) playerPosition.x -= 0.2f;
-        else if (IsKeyDown(KEY_DOWN)) playerPosition.z += 0.2f;
-        else if (IsKeyDown(KEY_UP)) playerPosition.z -= 0.2f;
+        if (IsKeyDown(KEY_RIGHT)) {
+            camera.target.x += 0.2f;
+            camera.position.x += 0.2f;
+            yaw = -90.0f;
+            playerPosition.x += 0.2f;
+        } else if (IsKeyDown(KEY_LEFT)) {
+            camera.target.x -= 0.2f;
+            camera.position.x -= 0.2f;
+            yaw = 90.0f;
+            playerPosition.x -= 0.2f;
+        } else if (IsKeyDown(KEY_DOWN)) {
+            camera.target.z += 0.2f;
+            camera.position.z += 0.2f;
+            yaw = 0.0f;
+            playerPosition.z += 0.2f;
+        } else if (IsKeyDown(KEY_UP)) {
+            camera.target.z -= 0.2f;
+            camera.position.z -= 0.2f;
+            yaw = 180.0f;
+            playerPosition.z -= 0.2f;
+        }
+
+        Matrix transform = MatrixIdentity();
+        transform = MatrixMultiply(transform, MatrixRotateY(DEG2RAD * yaw));
+        model.transform = transform;
         
         collision = false;
         
