@@ -26,11 +26,11 @@ int main()
 
     //Model model = LoadModel("raylib/examples/models/resources/models/turret.obj");                 // Load OBJ model
     //Texture2D texture = LoadTexture("raylib/examples/models/resources/models/turret_diffuse.png"); // Load model texture
-    Model model = LoadModel("head.obj");                 // Load OBJ model
-    Texture2D texture = LoadTexture("headcolor.png"); // Load model texture
+    Model model = LoadModel("char.obj");                 // Load OBJ model
+    Texture2D texture = LoadTexture("charcolor.png"); // Load model texture
     model.materials[0].maps[MAP_DIFFUSE].texture = texture;                 // Set map diffuse texture
     
-    Vector3 playerPosition = { 0.0f, 1.0f, 2.0f };
+    Vector3 playerPosition = { 0.0f, 3.5f, 2.0f };
     Vector3 playerSize = { 1.0f, 2.0f, 1.0f };
     Color playerColor = GREEN;
     
@@ -128,7 +128,7 @@ int main()
                 DrawSphereWires(enemySpherePos, enemySphereSize, 16, 16, DARKGRAY);
                 
                 // Draw player
-                DrawModel(model, playerPosition, 1.0f, WHITE);   // Draw 3d model with texture
+                DrawModel(model, playerPosition, 0.20f, WHITE);   // Draw 3d model with texture
                 //DrawCubeV(playerPosition, playerSize, playerColor);
 
                 DrawGrid(10, 1.0f);        // Draw a grid
